@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.all('*', function (req, res, next) {
 
     // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
-    res.header("Access-Control-Allow-Origin", "https://b3vet.github.io/notifyMeJS");
+    res.header("Access-Control-Allow-Origin", "https://b3vet.github.io");
     res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
     res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
 
