@@ -1,3 +1,4 @@
+//I LOVE COPY PASE EDIT
 var express = require('express'),
     request = require('request'),
     bodyParser = require('body-parser'),
@@ -18,7 +19,7 @@ app.all('*', function (req, res, next) {
     } else {
         var targetURL = req.header('Target-URL');
         if (!targetURL) {
-            res.send(500, { error: 'There is no Target-Endpoint header in the request' });
+            res.send(500, { error: 'There is no Target-URL header in the request' });
             return;
         }
         request({ url: targetURL, method: req.method, json: req.body, headers: {'Authorization': req.header('Authorization')} },
@@ -26,7 +27,6 @@ app.all('*', function (req, res, next) {
                 if (error) {
                     console.error('error: ' + response.statusCode)
                 }
-//                console.log(body);
             }).pipe(res);
     }
 });
