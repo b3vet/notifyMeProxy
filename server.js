@@ -1,6 +1,6 @@
 //I LOVE COPY PASE EDIT
+import axios from 'axios'
 var express = require('express'),
-    request = require('request'),
     bodyParser = require('body-parser'),
     app = express();
 
@@ -19,17 +19,18 @@ app.all('*', function (req, res, next) {
     } else {
         var targetURL = req.header('Target-URL');
         if (!targetURL) {
-            res.send(500, { error: 'There is no Target-URL header in the request' });
+            res.status(500).send({ error: 'There is no Target-URL header in the request' });
             return;
         }
-        request({ url: targetURL, method: req.method, json: req.body, headers: {'Authorization': req.header('Authorization')} },
-            function (error, response, body) {
-                if (error) {
-                    console.error(`error: ${response?.statusCode}`)
-                    res.send(400, {error})
-                    return;
-                }
-            }).pipe(res);
+        axios.get(targetURL, {
+            body: req.body,
+            headers: req.header('Authorization') ? {'Authorization': req.header('Authorization')} : {}
+        }).then((response) => {
+            res.send(response)
+        }).catch((error) => {
+            console.error(`error: ${error}`)
+            res.status(400).send({error})
+        })
     }
 });
 
