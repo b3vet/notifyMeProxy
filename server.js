@@ -1,7 +1,6 @@
-//I LOVE COPY PASE EDIT
-import axios from 'axios'
 var express = require('express'),
     bodyParser = require('body-parser'),
+    axios = require('axios'),
     app = express();
 
 app.use(bodyParser.json());
