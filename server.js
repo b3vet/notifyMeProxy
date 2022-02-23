@@ -27,6 +27,7 @@ app.all('*', function (req, res, next) {
                 if (error) {
                     console.error('error: ' + response.statusCode)
                     res.send(400, {error})
+                    return;
                 }
             }).pipe(res);
     }
